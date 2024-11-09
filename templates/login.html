@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
+  <link rel="stylesheet" href="/static/styles/login.css">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
@@ -23,26 +24,38 @@
     </div>
   </header>
   <main>
-    <form method="POST">
-      {{form.hidden_tag()}}
+    <section>
+      <form method="POST">
+        {{form.hidden_tag()}}
 
-      {{form.email.label}}
-      {{form.email()}}
-      <br>
-      {{form.password.label}}
-      {{form.password()}}
-      <br>
-      {{form.submit()}}
-    </form>
+        <h1>Login</h1>
+        <br>
+        <h4>{{form.email.label}}</h4>
+        <div class="loginInput">
+          {{form.email()}}
+          <br>
+          <h4>{{form.password.label}}</h4>
+          {{form.password(class_="loginInput")}}
+        </div>
+        <br>
+        <div class="loginBtn">
+          {{form.submit()}}
+        </div>
+        <div class="register">
+          <p>Don't have an account <a href="/register"> Register </a></p>
+        </div>
+      </form>
+
+      <!-- <footer>
+        <br>
+        <a href="/register"> Register </a>
+        &emsp;&emsp;&emsp;&emsp;&emsp;
+        <a href="/login"> Login </a>
+        &emsp;&emsp;&emsp;&emsp;&emsp;
+        <a href="/logout"> Logout </a>
+        <br>
+      </footer> -->
+    </section>
   </main>
-  <footer>
-    <br>
-    <a href="/register"> Register </a>
-    &emsp;&emsp;&emsp;&emsp;&emsp;
-    <a href="/login"> Login </a>
-    &emsp;&emsp;&emsp;&emsp;&emsp;
-    <a href="/logout"> Logout </a>
-    <br>
-  </footer>
 </body>
 </html>
