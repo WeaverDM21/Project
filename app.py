@@ -45,6 +45,26 @@ login_manager.session_protection = "strong"
 def load_user(uid: int) -> User|None:
     return User.query.get(int(uid))
 
+# Create a database model for Movies
+class Movie(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.Unicode, nullable=False)
+    year = db.Column(db.Integer, nullable=False)
+    rated = db.Column(db.Unicode)
+    released = db.Column(db.Unicode, nullable=False)
+    runtime = db.Column(db.Unicode, nullable=False)
+    genre = db.Column(db.Unicode)
+    director = db.Column(db.Unicode)
+    writer = db.Column(db.Unicode)
+    actors = db.Column(db.Unicode)
+    plot = db.Column(db.Unicode)
+    language = db.Column(db.Unicode)
+    country = db.Column(db.Unicode)    
+    awards = db.Column(db.Unicode)
+    poster = db.Column(db.Unicode)
+    type = db.Column(db.Unicode)
+    box_office = db.Column(db.Unicode)
+
 # Create a database model for Users
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
