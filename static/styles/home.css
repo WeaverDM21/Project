@@ -1,8 +1,51 @@
-/* styles.css */
-header {
-    background-image: url("../images/movieBanner.jpg");
-    background-size: cover;
-    background-position: center 38%;
-    height: 150px;
+.navbar {
+    background: rgb(63, 63, 63); 
+    font-family: Calibri, sans-serif; 
+    padding: 0 15px;
 }
-  
+
+.navdiv {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    width: 100%;
+}
+
+.title {
+    font-size: 35px; 
+    font-weight: 600; 
+    color: white;
+}
+
+.search-container {
+    flex-grow: 1;
+    max-width: 1000px;
+    margin: 0 20px;
+    display: flex;
+    align-items: center;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.registration {
+    display: flex;
+    gap: 20px
+}
+
+.registration a {
+    color: white;
+    font-size: 18px; 
+    font-weight: bold;
+    margin-right: 15px;
+    text-decoration: none;
+}
+
+.registration a:hover {
+    color: lightgray;
+}
