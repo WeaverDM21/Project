@@ -160,7 +160,7 @@ def makeRequest():
 def get_logout():
     logout_user()
     flash('You have been logged out')
-    return redirect(url_for('index'))
+    return redirect(url_for('get_login'))
 
 def admin_required(f):
     @wraps(f)
