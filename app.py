@@ -65,7 +65,7 @@ class User(UserMixin, db.Model):
         return pwd_hasher.check(pwd, self.password_hash)
 
 def create_admin():
-    if not User.query.filter_by(email="admin@example.com").first():
+    if not User.query.filter_by(email="admin@gmail.com").first():
         admin = User(email="admin@gmail.com", role="admin")
         admin.password = "SupremeRuler"  # set a strong password
         db.session.add(admin)

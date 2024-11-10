@@ -1,0 +1,8 @@
+/* styles.css */
+header {
+    background-image: url("../images/movieBanner.jpg");
+    background-size: cover;
+    background-position: center 38%;
+    height: 150px;
+}
+  
