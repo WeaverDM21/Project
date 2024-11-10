@@ -9,6 +9,7 @@ from flask_login import login_user, logout_user, current_user
 from hashing_examples import UpdatedHasher
 from loginforms import RegisterForm, LoginForm
 import requests
+import json
 
 from functools import wraps
 
@@ -48,22 +49,22 @@ def load_user(uid: int) -> User|None:
 # Create a database model for Movies
 class Movie(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.Unicode, nullable=False)
-    year = db.Column(db.Integer, nullable=False)
-    rated = db.Column(db.Unicode)
-    released = db.Column(db.Unicode, nullable=False)
-    runtime = db.Column(db.Unicode, nullable=False)
-    genre = db.Column(db.Unicode)
-    director = db.Column(db.Unicode)
-    writer = db.Column(db.Unicode)
-    actors = db.Column(db.Unicode)
-    plot = db.Column(db.Unicode)
-    language = db.Column(db.Unicode)
-    country = db.Column(db.Unicode)    
-    awards = db.Column(db.Unicode)
-    poster = db.Column(db.Unicode)
-    type = db.Column(db.Unicode)
-    box_office = db.Column(db.Unicode)
+    Title = db.Column(db.Unicode, nullable=False)
+    Year = db.Column(db.Integer, nullable=False)
+    Rated = db.Column(db.Unicode)
+    Released = db.Column(db.Unicode, nullable=False)
+    Runtime = db.Column(db.Unicode, nullable=False)
+    Genre = db.Column(db.Unicode)
+    Director = db.Column(db.Unicode)
+    Writer = db.Column(db.Unicode)
+    Actors = db.Column(db.Unicode)
+    Plot = db.Column(db.Unicode)
+    Language = db.Column(db.Unicode)
+    Country = db.Column(db.Unicode)    
+    Awards = db.Column(db.Unicode)
+    Poster = db.Column(db.Unicode)
+    Type = db.Column(db.Unicode)
+    BoxOffice = db.Column(db.Unicode)
 
 # Create a database model for Users
 class User(UserMixin, db.Model):
@@ -171,7 +172,11 @@ def makeRequest():
 
     if response.status_code == 200:
         data = response.json()
-        print(data)  # This will print the movie data
+        for i in data:
+            if (i != "Ratings") & (i != "Metascore") & (i != "imdbRating") & (i != "imdbVotes") & (i != "imdbID") & (i != "DVD") & (i != "Production") & (i != "Website") & (i != "Response"):
+                print(f"Type: {i}")
+                print(data[i])
+        #print(data)  # This will print the movie data
     else:
         print(f"Error: {response.status_code}")
 
