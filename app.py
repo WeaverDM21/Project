@@ -156,16 +156,16 @@ def post_login():
 
 @app.get('/')
 def index():
-    makeRequest()
+    makeRequest("Inception")
     return render_template('home.html', current_user=current_user)
 
-def makeRequest():
+def makeRequest(title: str):
     api_key = 'fafe5690'
     base_url = 'http://www.omdbapi.com/'
-    title = "Inception"
+    title = "Money"
     params = {
         'apikey': api_key,
-        't': title
+        's': title,
     }
 
     response = requests.get(base_url, params=params)
@@ -175,20 +175,18 @@ def makeRequest():
         db.create_all()
 
         data = response.json()
-        for i in data:
-            if (i != "Ratings") & (i != "Metascore") & (i != "imdbRating") & (i != "imdbVotes") & (i != "imdbID") & (i != "DVD") & (i != "Production") & (i != "Website") & (i != "Response"):
-                print(f"Type: {i}")
-                print(data[i])
+        #for movie in data:
+        #    movie = Movie(Title=movie["Title"], Year=movie["Year"], Rated=movie["Rated"], Released=movie["Released"], Runtime=movie["Runtime"], Genre=movie["Genre"], Director=movie["Director"], Actors=movie["Actors"], Plot=movie["Plot"], Language=movie["Language"], Country=movie["Country"], Awards=movie["Awards"], Poster=movie["Poster"], Type=movie["Type"], BoxOffice=movie["BoxOffice"])
+        #    db.session.add(movie)
 
-        movie = Movie(Title=data["Title"], Year=data["Year"], Rated=data["Rated"], Released=data["Released"], Runtime=data["Runtime"], Genre=data["Genre"], Director=data["Director"], Actors=data["Actors"], Plot=data["Plot"], Language=data["Language"], Country=data["Country"], Awards=data["Awards"], Poster=data["Poster"], Type=data["Type"], BoxOffice=data["BoxOffice"])
-        db.session.add(movie)
-        db.session.commit()
+        
+        #db.session.commit()
 
-        movies = Movie.query.all()
-        for movie in movies:
-            print(movie.Title)
+        #movies = Movie.query.all()
+        #for movie in movies:
+        #    print(movie.Title)
 
-        #print(data)  # This will print the movie data
+        print(data)  # This will print the movie data
     else:
         print(f"Error: {response.status_code}")
 
