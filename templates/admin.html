@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+</head>
+<body>
+    <header>
+      <div class="container">
+        {% for message in get_flashed_messages() %}
+          <div class="alert alert-warning d-flex align-items-center alert-dismissible fade show">
+            <button type="button" class="close" data-bs-dismiss="alert"> 
+              &times;
+            </button>
+            {{ message }}
+          </div>
+        {% endfor %}
+      </div>
+    </header>
+    <main>
+      <h1>Admin Page</h1>
+      <p>You are on the correct page.</p>
+      {% if current_user.is_authenticated %}
+        <p>Logged in as {{ current_user.email }}</p>
+      {% else %}
+        <p>Not logged in</p>
+      {% endif %}
+    </main>
+    <footer>
+      <br>
+      <a href="/register">Register</a>
+      &emsp;&emsp;&emsp;&emsp;&emsp;
+      <a href="/login">Login</a>
+      &emsp;&emsp;&emsp;&emsp;&emsp;
+      <a href="/logout">Logout</a>
+      &emsp;&emsp;&emsp;&emsp;&emsp;
+      <a href="/admin">Admin</a>
+      <br>
+    </footer>
+</body>
+</html>

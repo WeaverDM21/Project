@@ -10,6 +10,7 @@ from hashing_examples import UpdatedHasher
 from loginforms import RegisterForm, LoginForm
 import requests
 
+from functools import wraps
 
 # Identify necessary files
 scriptdir = os.path.dirname(os.path.abspath(__file__))
@@ -49,6 +50,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.Unicode, nullable=False)
     password_hash = db.Column(db.LargeBinary) # hash is a binary attribute
+    role = db.Column(db.String, default="user")
 
     # make a write-only password property that just updates the stored hash
     @property
@@ -62,11 +64,17 @@ class User(UserMixin, db.Model):
     def verify_password(self, pwd: str) -> bool:
         return pwd_hasher.check(pwd, self.password_hash)
 
+def create_admin():
+    if not User.query.filter_by(email="admin@example.com").first():
+        admin = User(email="admin@gmail.com", role="admin")
+        admin.password = "SupremeRuler"  # set a strong password
+        db.session.add(admin)
+        db.session.commit()
+
 # remember that all database operations must occur within an app context
 with app.app_context():
     db.create_all() # this is only needed if the database doesn't already exist
-
-
+    create_admin()
 
 @app.get('/register/')
 def get_register():
@@ -153,3 +161,19 @@ def get_logout():
     logout_user()
     flash('You have been logged out')
     return redirect(url_for('index'))
+
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if current_user.is_anonymous or current_user.role != "admin":
+            flash('You do not have access to this page')
+            return redirect(url_for('index'))
+        return f(*args, **kwargs)
+    return decorated_function
+
+
+@app.get('/admin/')
+@login_required
+@admin_required
+def adminPage():
+    return render_template('admin.html')
