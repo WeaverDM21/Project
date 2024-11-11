@@ -2,7 +2,6 @@
     background: rgb(63, 63, 63); 
     font-family: Calibri, sans-serif; 
     padding: 0 15px;
-    overflow: hidden;
     position: fixed;
     top: 0px;
     width: 100%;
@@ -64,7 +63,7 @@
     border: 1px solid #ccc;
     max-height: 300px;
     overflow-y: auto;
-    z-index: 1000;
+    z-index: 9000;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
 }
