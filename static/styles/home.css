@@ -1,14 +1,15 @@
-.navbar {
+.navdiv {
     background: rgb(63, 63, 63); 
     font-family: Calibri, sans-serif; 
     padding: 0 15px;
-}
-
-.navdiv {
+    overflow: hidden;
+    position: fixed;
+    top: 0px;
+    width: 100%;
     display: flex; 
     align-items: center; 
     justify-content: space-between;
-    width: 100%;
+    z-index: 10;
 }
 
 .title {
@@ -74,45 +75,65 @@
     text-decoration: none;
     color: #333;
 }
+
+h2 {
+    color: white; 
+}
   
 .search-results a:hover {
     background-color: #f1f1f1;
   }
 
-  /* Container for the scroll box */
 .scroll-box-container {
-    background-color: #676767;
-    width: 100%;               /* Set the container width */
-    height: 220px;             /* Set the container height */
-    overflow: hidden;          /* Hide vertical scrollbar if present */
-    position: relative;        /* Position relative to contain the scroll box */
+    background-color: #525252;
+    width: 100%;
+    height: 220px;
+    overflow: auto;
+    position: relative;
 }
 
 .scroll-box::-webkit-scrollbar {
-    display: none; /* Hide the scrollbar */
+    display: none;
 }
 
-/* The scrollable box inside the container */
 .scroll-box {
-    display: flex;             /* Align items in a row */
-    overflow-x: auto;          /* Enable horizontal scrolling */
-    white-space: nowrap;       /* Prevent items from wrapping to the next line */
-    padding: 10px 0;           /* Add some padding */
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px 0;
 }
 
-/* Individual items in the scroll box */
 #poster-image {
-    height: 200px;             /* Set the height of each item */
-    margin-right: 10px;        /* Add space between items */
+    height: 200px;
+    margin-right: 10px;
     text-align: center;
 }
 
 .ActionMovies {
     padding-bottom: 10px;
-    padding-top: 10px;
+    padding-top: 65px;
+    padding-left: 15px;
 }
 
 .ComedyMovies {
     padding-bottom: 10px;
     padding-top: 10px;
+    padding-left: 15px;
+}
+
+.RomanceMovies {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 15px;
+}
+
+.WesternMovies {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 15px;
+}
+
+.Movies {
+    background-color: #525252;
+    z-index: 1;
 }
