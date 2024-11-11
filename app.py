@@ -52,7 +52,7 @@ class Movie(db.Model):
     Title = db.Column(db.Unicode, nullable=False)
     Year = db.Column(db.Integer, nullable=False)
     Rated = db.Column(db.Unicode)
-    Released = db.Column(db.Unicode, nullable=False)
+    Released = db.Column(db.Unicode)
     Runtime = db.Column(db.Unicode, nullable=False)
     Genre = db.Column(db.Unicode)
     Director = db.Column(db.Unicode)
@@ -96,6 +96,18 @@ def create_admin():
 with app.app_context():
     db.create_all() # this is only needed if the database doesn't already exist
     create_admin()
+    # comedies = [
+    #     Movie(Title="Step Brothers", Year=2008, runtime = "1h 38m"),
+    #     Movie(Title="White Chicks", Year=2004, runtime = "1h 49m"),
+    #     Movie(Title="The Hangover", Year=2009, runtime = "1h 40m"),
+    #     Movie(Title="Horrible Bosses", Year=2011, runtime = "1h 38m"),
+    #     Movie(Title="Drillbit Taylor", Year=2008, runtime = "1h 50m"),
+    #     Movie(Title="Wedding Crashers", Year=2005, runtime = "1h 59m"),
+    #     Movie(Title="Bad Teacher", Year=2011, runtime = "1h 32m"),
+    #     Movie(Title="The Other Guys", Year=2010, runtime = "1h 47m"),
+    #     Movie(Title="Due Date", Year=2010, runtime = "1h 35m"),
+    #     Movie(Title="Taxi", Year=2004, runtime = "1h 37m"),
+    # ]
 
 @app.get('/register/')
 def get_register():
@@ -156,13 +168,13 @@ def post_login():
 
 @app.get('/')
 def index():
-    makeRequest("Inception")
+    comedyMovies = makeRequest("Comedy")
     return render_template('home.html', current_user=current_user)
 
-def makeRequest(title: str):
+def makeRequest(genre: str):
     api_key = 'fafe5690'
     base_url = 'http://www.omdbapi.com/'
-    title = "Money"
+    title = "The"
     params = {
         'apikey': api_key,
         's': title,
@@ -175,9 +187,12 @@ def makeRequest(title: str):
         db.create_all()
 
         data = response.json()
-        #for movie in data:
+        # for movie in data:
         #    movie = Movie(Title=movie["Title"], Year=movie["Year"], Rated=movie["Rated"], Released=movie["Released"], Runtime=movie["Runtime"], Genre=movie["Genre"], Director=movie["Director"], Actors=movie["Actors"], Plot=movie["Plot"], Language=movie["Language"], Country=movie["Country"], Awards=movie["Awards"], Poster=movie["Poster"], Type=movie["Type"], BoxOffice=movie["BoxOffice"])
         #    db.session.add(movie)
+            # if movie["Genre"] == genre:
+            #     print(movie["Title"])
+            
 
         
         #db.session.commit()

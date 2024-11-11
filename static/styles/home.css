@@ -78,4 +78,41 @@
   .search-results a:hover {
     background-color: #f1f1f1;
   }
-  
+
+  /* Container for the scroll box */
+.scroll-box-container {
+    background-color: #676767;
+    width: 100%;               /* Set the container width */
+    height: 220px;             /* Set the container height */
+    overflow: hidden;          /* Hide vertical scrollbar if present */
+    position: relative;        /* Position relative to contain the scroll box */
+}
+
+.scroll-box::-webkit-scrollbar {
+    display: none; /* Hide the scrollbar */
+}
+
+/* The scrollable box inside the container */
+.scroll-box {
+    display: flex;             /* Align items in a row */
+    overflow-x: auto;          /* Enable horizontal scrolling */
+    white-space: nowrap;       /* Prevent items from wrapping to the next line */
+    padding: 10px 0;           /* Add some padding */
+}
+
+/* Individual items in the scroll box */
+#poster-image {
+    height: 200px;             /* Set the height of each item */
+    margin-right: 10px;        /* Add space between items */
+    text-align: center;
+}
+
+.ActionMovies {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.ComedyMovies {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}

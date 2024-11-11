@@ -45,22 +45,33 @@
     </div>
   </header>
   <main>
-    {% if current_user.is_authenticated %}
-      <h1>Logged in as {{current_user.email}}</h1>
-    {% else %}
-      <h1>Not logged in</h1>
-    {% endif %}
-    <div class="allMovies">
-      <h1>All Movies</h1>
-      {% for movie in movies %}
-        <!-- <button>
-          <section>
-            <p>{{movie.title}}</p>
-          </section>
-        </button> -->
+    <div id="ActionMovies" class="ActionMovies">
+      <h2>Action Movies</h2>
+      <div class="scroll-box-container">
+        <div id="scroll-box-action" class="scroll-box">
+        </div>
     </div>
-    <div class="topMovies">
-
+    </div>
+    <div id="ComedyMovies" class="ComedyMovies">
+      <h2>Comedy Movies</h2>
+      <div class="scroll-box-container">
+        <div id="scroll-box-comedy" class="scroll-box">
+        </div>
+    </div>
+    </div>
+    <div id="RomanceMovies" class="RomanceMovies">
+      <h2>Romance Movies</h2>
+      <div class="scroll-box-container">
+        <div id="scroll-box-romance" class="scroll-box">
+        </div>
+    </div>
+    </div>
+    <div id="WesternMovies" class="WesternMovies">
+      <h2>Western Movies</h2>
+      <div class="scroll-box-container">
+        <div id="scroll-box-western" class="scroll-box">
+        </div>
+    </div>
     </div>
   </main>
 </body>
