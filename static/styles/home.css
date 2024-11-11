@@ -51,31 +51,31 @@
 }
 
 .search-container {
-    position: relative; /* Position relative to keep search-results aligned with the search bar */
+    position: relative;
   }
   
-  .search-results {
+.search-results {
     position: absolute;
-    top: 100%; /* Positions the results directly below the search bar */
+    top: 100%;
     left: 0;
     width: 100%;
     background-color: white;
     border: 1px solid #ccc;
     max-height: 300px;
     overflow-y: auto;
-    z-index: 1000; /* Keeps the results on top of other elements */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for better visibility */
+    z-index: 1000;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
-  }
+}
   
-  .search-results a {
+.search-results a {
     display: block;
     padding: 8px 16px;
     text-decoration: none;
     color: #333;
-  }
+}
   
-  .search-results a:hover {
+.search-results a:hover {
     background-color: #f1f1f1;
-  }
+}
   
