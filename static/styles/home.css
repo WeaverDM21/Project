@@ -34,8 +34,10 @@
 }
 
 .registration {
+    color: white;
     display: flex;
-    gap: 20px
+    gap: 20px;
+    align-items: center; 
 }
 
 .registration a {

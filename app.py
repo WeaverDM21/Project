@@ -183,7 +183,7 @@ def makeRequest(genre: str):
     response = requests.get(base_url, params=params)
 
     if response.status_code == 200:
-        db.drop_all()
+        Movie.query.delete()
         db.create_all()
 
         data = response.json()

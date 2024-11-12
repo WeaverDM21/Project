@@ -13,7 +13,7 @@
 </head>
 <body>
   <header>
-    <div class="container">
+    <!-- <div class="container">
       {% for message in get_flashed_messages() %}
         <div class="alert alert-warning d-flex align-items-center alert-dismissible fade show">
           <button type="button" class="close" data-bs-dismiss="alert"> 
@@ -22,7 +22,7 @@
           {{ message }}
         </div>
       {% endfor %}
-    </div>
+    </div> -->
   </header>
   <main>
     <div class="navdiv">
@@ -35,11 +35,17 @@
       </div>
       <div class="registration">
         <a href="/"> Home </a>
-        <a href="/register"> Register </a>
-        <a href="/login"> Login </a>
-        <a href="/logout"> Logout </a>
-        {% if current_user.role == "admin" %}
-          <a href="/admin"> Admin </a>
+        {% if current_user.is_authenticated %}
+          {% if current_user.role == "admin" %}
+            <a href="/admin"> Admin </a>
+          {% endif %}
+          <a href="/logout"> Logout </a>
+          <a>{{current_user.email}}</a>
+        {% else %}
+          <a href="/login"> Login </a>
+          {% if current_user.role == "admin" %}
+            <a href="/admin"> Admin </a>
+          {% endif %}
         {% endif %}
       </div>
     </div>
