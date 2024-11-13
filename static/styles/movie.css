@@ -155,3 +155,8 @@ h2 {
     background-color: #525252;
     z-index: 1;
 }
+
+img {
+    float: left;
+    margin: 5px;
+}
