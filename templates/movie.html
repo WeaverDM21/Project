@@ -36,16 +36,18 @@
         {% endif %}
       </div>
     </div>
-    <div class="title">
-      <h1>{{movie_info['original_title']}}</h1>
+    <div class="Movies">
+      <div class="name">
+        <h1>{{movie_info['original_title']}}</h1>
+      </div>
+      <div class="details">
+        <h3>{{movie_info['release_date']}}</h3>
+      </div>
+      <div class="description">
+        <p>{{movie_info['overview']}}</p>
+      </div>
+      <img src="https://image.tmdb.org/t/p/w500/{{movie_info['poster_path']}}" width="400" height="600">
     </div>
-    <div class="details">
-      <h3>{{movie_info['release_date']}}</h3>
-    </div>
-    <div class="description">
-      <p>{{movie_info['overview']}}</p>
-    </div>
-    <img src="https://image.tmdb.org/t/p/w500/{{movie_info['poster_path']}}" width="400" height="600">
   </main>
 </body>
 </html>
