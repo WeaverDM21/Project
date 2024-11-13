@@ -47,7 +47,7 @@ def load_user(uid: int) -> User|None:
     return User.query.get(int(uid))
 
 #Create a database model for Reviews
-class Review(db.model):
+class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userID = db.Column(db.Integer, nullable=False)
     rating = db.Column(db.Integer, nullable=False)
@@ -143,7 +143,6 @@ def post_login():
 
 @app.get('/')
 def index():
-    comedyMovies = makeRequest("Comedy")
     return render_template('home.html', current_user=current_user)
 
 @app.get('/movie/<string:movie_name>')
