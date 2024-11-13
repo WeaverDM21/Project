@@ -23,7 +23,7 @@ async function loadSearchResults() {
             if (i < 7){
                 const link = document.createElement("a");
                 link.innerText = movie["title"];
-                link.href=`/movie/${movie["title"]}`
+                link.href=`/movie/${movie["id"]}`
                 resultsDiv.appendChild(link);
                 i++;
             }
