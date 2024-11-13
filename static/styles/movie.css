@@ -160,7 +160,9 @@ h2 {
 
 .Movies img {
     max-width: 400px;
-    height: auto; /* Ensures the image scales proportionally */
+    height: auto;
+    padding: 10px;
+    padding-top: 40px;
 }
 
 .text-content {
