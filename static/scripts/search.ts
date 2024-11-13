@@ -72,7 +72,7 @@ async function loadUrl(url: string, box: string) {
                 section.id = "poster-section";
                 // Create a link
                 const link = document.createElement("a");
-                link.href = `/movie/${movie["title"]}`;
+                link.href = `/movie/${movie["id"]}`;
                 // Create an image to go in section
                 const image = document.createElement("img");
                 image.src = `https://image.tmdb.org/t/p/w500/${movie["poster_path"]}`;

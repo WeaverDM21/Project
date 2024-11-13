@@ -46,25 +46,12 @@ login_manager.session_protection = "strong"
 def load_user(uid: int) -> User|None:
     return User.query.get(int(uid))
 
-# Create a database model for Movies
-class Movie(db.Model):
+#Create a database model for Reviews
+class Review(db.model):
     id = db.Column(db.Integer, primary_key=True)
-    Title = db.Column(db.Unicode, nullable=False)
-    Year = db.Column(db.Integer, nullable=False)
-    Rated = db.Column(db.Unicode)
-    Released = db.Column(db.Unicode)
-    Runtime = db.Column(db.Unicode, nullable=False)
-    Genre = db.Column(db.Unicode)
-    Director = db.Column(db.Unicode)
-    Writer = db.Column(db.Unicode)
-    Actors = db.Column(db.Unicode)
-    Plot = db.Column(db.Unicode)
-    Language = db.Column(db.Unicode)
-    Country = db.Column(db.Unicode)    
-    Awards = db.Column(db.Unicode)
-    Poster = db.Column(db.Unicode)
-    Type = db.Column(db.Unicode)
-    BoxOffice = db.Column(db.Unicode)
+    userID = db.Column(db.Integer, nullable=False)
+    rating = db.Column(db.Integer, nullable=False)
+    text = db.Column(db.Unicode)
 
 # Create a database model for Users
 class User(UserMixin, db.Model):
@@ -96,18 +83,6 @@ def create_admin():
 with app.app_context():
     db.create_all() # this is only needed if the database doesn't already exist
     create_admin()
-    # comedies = [
-    #     Movie(Title="Step Brothers", Year=2008, runtime = "1h 38m"),
-    #     Movie(Title="White Chicks", Year=2004, runtime = "1h 49m"),
-    #     Movie(Title="The Hangover", Year=2009, runtime = "1h 40m"),
-    #     Movie(Title="Horrible Bosses", Year=2011, runtime = "1h 38m"),
-    #     Movie(Title="Drillbit Taylor", Year=2008, runtime = "1h 50m"),
-    #     Movie(Title="Wedding Crashers", Year=2005, runtime = "1h 59m"),
-    #     Movie(Title="Bad Teacher", Year=2011, runtime = "1h 32m"),
-    #     Movie(Title="The Other Guys", Year=2010, runtime = "1h 47m"),
-    #     Movie(Title="Due Date", Year=2010, runtime = "1h 35m"),
-    #     Movie(Title="Taxi", Year=2004, runtime = "1h 37m"),
-    # ]
 
 @app.get('/register/')
 def get_register():
@@ -194,26 +169,6 @@ def makeRequestName(title: str):
     else:
         print(f"Error: {response.status_code}")
 
-def makeRequest(genre: str):
-    api_key = 'fafe5690'
-    base_url = 'http://www.omdbapi.com/'
-    title = "The"
-    params = {
-        'apikey': api_key,
-        's': title,
-    }
-
-    response = requests.get(base_url, params=params)
-
-    if response.status_code == 200:
-        Movie.query.delete()
-        db.create_all()
-
-        data = response.json()
-        print(data)  # This will print the movie data
-    else:
-        print(f"Error: {response.status_code}")
-
 @app.get('/logout/')
 @login_required
 def get_logout():
@@ -229,7 +184,6 @@ def admin_required(f):
             return redirect(url_for('index'))
         return f(*args, **kwargs)
     return decorated_function
-
 
 @app.get('/admin/')
 @login_required
