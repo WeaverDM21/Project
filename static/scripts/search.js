@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     loadHomePage();
     const searchField = document.getElementById("search-bar");
     searchField.addEventListener("input", loadSearchResults);
+    searchField.addEventListener("click", loadSearchResults);
+    searchField.addEventListener("blur", clearResults);
 });
 async function loadSearchResults() {
     const searchField = document.getElementById("search-bar");
@@ -66,4 +68,13 @@ async function loadUrl(url, box) {
             }
         }
     }
+}
+async function clearResults() {
+    document.addEventListener("click", (event) => {
+        const targetElement = event.target;
+        if (targetElement.id !== "search-results") {
+            const resultsDiv = document.getElementById("search-results");
+            resultsDiv.innerHTML = "";
+        }
+    });
 }

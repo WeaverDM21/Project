@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     loadHomePage();
     const searchField = <HTMLInputElement> document.getElementById("search-bar");
     searchField.addEventListener("input", loadSearchResults);
+    searchField.addEventListener("click", loadSearchResults);
+    searchField.addEventListener("blur", clearResults);
 });
 
 async function loadSearchResults() {
@@ -83,4 +85,14 @@ async function loadUrl(url: string, box: string) {
             }
         }
     }
+}
+
+async function clearResults() {
+    document.addEventListener("click", (event) => {
+        const targetElement = event.target as HTMLElement; // Cast to HTMLElement
+        if (targetElement.id !== "search-results") {
+            const resultsDiv = <HTMLDivElement> document.getElementById("search-results");
+            resultsDiv.innerHTML = "";            
+        }
+    });
 }

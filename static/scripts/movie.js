@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const searchField = document.getElementById("search-bar");
     searchField.addEventListener("input", loadSearchResults_movie);
+    searchField.addEventListener("click", loadSearchResults_movie);
+    searchField.addEventListener("blur", clearResults_movie);
 });
 async function loadSearchResults_movie() {
     const searchField = document.getElementById("search-bar");
@@ -33,4 +35,13 @@ async function validateJSON_movie(response) {
     else {
         return Promise.reject(response);
     }
+}
+async function clearResults_movie() {
+    document.addEventListener("click", (event) => {
+        const targetElement = event.target;
+        if (targetElement.id !== "search-results") {
+            const resultsDiv = document.getElementById("search-results");
+            resultsDiv.innerHTML = "";
+        }
+    });
 }

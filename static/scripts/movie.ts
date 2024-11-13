@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const searchField = <HTMLInputElement> document.getElementById("search-bar");
     searchField.addEventListener("input", loadSearchResults_movie);
+    searchField.addEventListener("click", loadSearchResults_movie);
+    searchField.addEventListener("blur", clearResults_movie);
 });
 
 async function loadSearchResults_movie() {
@@ -39,4 +41,14 @@ async function validateJSON_movie(response: Response): Promise<any> {
     } else {
         return Promise.reject(response);
     }
+}
+
+async function clearResults_movie() {
+    document.addEventListener("click", (event) => {
+        const targetElement = event.target as HTMLElement; // Cast to HTMLElement
+        if (targetElement.id !== "search-results") {
+            const resultsDiv = <HTMLDivElement> document.getElementById("search-results");
+            resultsDiv.innerHTML = "";            
+        }
+    });
 }
