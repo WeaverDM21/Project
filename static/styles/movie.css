@@ -21,12 +21,16 @@
     font-size: 20px;
     font-weight: 600;
     color: white;
+    padding-bottom: 10px;
+    padding-left: 15px;
 }
 
 .description {
     font-size: 12px;
     font-weight: 600;
     color: white;
+    padding-bottom: 10px;
+    padding-left: 15px;
 }
 
 .search-container {
@@ -159,4 +163,11 @@ h2 {
 img {
     float: left;
     margin: 5px;
+}
+
+.name {
+    color: white;
+    padding-bottom: 10px;
+    padding-top: 65px;
+    padding-left: 15px;
 }
