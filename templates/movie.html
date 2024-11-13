@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/static/styles/movie.css">
+  <title>Movie</title>
+</head>
+<body class="Background">
+    <main>
+        <div class="navdiv">
+            <div class="title">
+              <h1><a>Movie Reviews</a></h1>
+            </div>
+            <div class="search-container">
+              <input type="text" id="search-bar" class="search-bar" placeholder="Search...">
+              <div id="search-results" class="search-results"></div>
+            </div>
+            <div class="registration">
+              <a href="/"> Home </a>
+              {% if current_user.is_authenticated %}
+                {% if current_user.role == "admin" %}
+                  <a href="/admin"> Admin </a>
+                {% endif %}
+                <a href="/logout"> Logout </a>
+                <a>{{current_user.email}}</a>
+              {% else %}
+                <a href="/login"> Login </a>
+                {% if current_user.role == "admin" %}
+                  <a href="/admin"> Admin </a>
+                {% endif %}
+              {% endif %}
+            </div>
+        </div>
+        <div class="title">
+            <h1>{{movie_info.results[0]['original_title']}}</h1>
+        </div>
+        <div class="details">
+            <h3>{{movie_info.results[0]['release_date']}}</h3>
+        </div>
+        <div class="description">
+            <p>{{movie_info.results[0]['overview']}}</p>
+        </div>
+        <img src="https://image.tmdb.org/t/p/w500/{{movie_info.results[0]['poster_path']}}" width="400" height="600">
+    </main>
+
+</body>
+</html>

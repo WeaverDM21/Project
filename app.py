@@ -171,6 +171,29 @@ def index():
     comedyMovies = makeRequest("Comedy")
     return render_template('home.html', current_user=current_user)
 
+@app.get('/movie/<string:movie_name>')
+def getMovie(movie_name: str):
+    movie_info = makeRequestName(movie_name)
+    print(f"In request header: {movie_name}")
+    return render_template('movie.html', movie_info=movie_info)
+
+def makeRequestName(title: str):
+    base_url = f"https://api.themoviedb.org/3/search/movie?api_key=d136d005b47c87f94a7f7245dbede8dd&query={title}"
+    print(f"In makeRequest {title}")
+
+    response = requests.get(base_url)
+
+    if response.status_code == 200:
+        data = response.json()
+        print(data)  # This will print the movie data
+        id = data['results'][0]['id']
+        response2 = requests.get(f"https://api.themoviedb.org/3/movie/{id}?api_key=d136d005b47c87f94a7f7245dbede8dd")
+        data2 = response2.json()
+        print(data2)
+        return data
+    else:
+        print(f"Error: {response.status_code}")
+
 def makeRequest(genre: str):
     api_key = 'fafe5690'
     base_url = 'http://www.omdbapi.com/'
@@ -187,20 +210,6 @@ def makeRequest(genre: str):
         db.create_all()
 
         data = response.json()
-        # for movie in data:
-        #    movie = Movie(Title=movie["Title"], Year=movie["Year"], Rated=movie["Rated"], Released=movie["Released"], Runtime=movie["Runtime"], Genre=movie["Genre"], Director=movie["Director"], Actors=movie["Actors"], Plot=movie["Plot"], Language=movie["Language"], Country=movie["Country"], Awards=movie["Awards"], Poster=movie["Poster"], Type=movie["Type"], BoxOffice=movie["BoxOffice"])
-        #    db.session.add(movie)
-            # if movie["Genre"] == genre:
-            #     print(movie["Title"])
-            
-
-        
-        #db.session.commit()
-
-        #movies = Movie.query.all()
-        #for movie in movies:
-        #    print(movie.Title)
-
         print(data)  # This will print the movie data
     else:
         print(f"Error: {response.status_code}")
