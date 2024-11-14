@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     searchField.addEventListener("input", loadSearchResults_movie);
     searchField.addEventListener("click", loadSearchResults_movie);
     searchField.addEventListener("blur", clearResults_movie);
+    const resultsDiv = <HTMLDivElement> document.getElementById("search-results");
+    resultsDiv.style.display = "none";
 });
 
 async function loadSearchResults_movie() {
@@ -20,6 +22,7 @@ async function loadSearchResults_movie() {
     var i = 0;
     if (Array.isArray(index["results"])) {
         resultsDiv.innerHTML = "";
+        resultsDiv.style.display = "block";
         for (const movie of index["results"]) {
             if (i < 7){
                 const link = document.createElement("a");
@@ -32,6 +35,7 @@ async function loadSearchResults_movie() {
     }
     if (searchField.value === ""){
         resultsDiv.innerHTML = "";
+        resultsDiv.style.display = "none";
     }
 }
 
@@ -48,7 +52,8 @@ async function clearResults_movie() {
         const targetElement = event.target as HTMLElement; // Cast to HTMLElement
         if (targetElement.id !== "search-results") {
             const resultsDiv = <HTMLDivElement> document.getElementById("search-results");
-            resultsDiv.innerHTML = "";            
+            resultsDiv.innerHTML = "";   
+            resultsDiv.style.display = "none";         
         }
     });
 }

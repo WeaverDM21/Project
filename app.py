@@ -8,6 +8,7 @@ from flask_login import login_user, logout_user, current_user
 
 from hashing_examples import UpdatedHasher
 from loginforms import RegisterForm, LoginForm
+from reviewForm import ReviewForm
 import requests
 import json
 
@@ -50,6 +51,7 @@ def load_user(uid: int) -> User|None:
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userID = db.Column(db.Integer, nullable=False)
+    movieID = db.Column(db.Integer, nullable=False)
     rating = db.Column(db.Integer, nullable=False)
     text = db.Column(db.Unicode)
 
@@ -145,11 +147,28 @@ def post_login():
 def index():
     return render_template('home.html', current_user=current_user)
 
-@app.get('/movie/<string:id>')
-def getMovie(id: str):
+@app.get('/movie/<int:id>/')
+def getMovie(id: int):
     movie_info = makeRequestID(id)
     print(f"In request header: {id}")
-    return render_template('movie.html', movie_info=movie_info)
+    form = ReviewForm()
+    reviews = Review.query.filter_by(movieID=id).all()
+    return render_template('movie.html', movie_info=movie_info, form=form, reviews=reviews)
+
+@app.post('/movie/<int:id>/')
+@login_required
+def post_Movie(id: int):
+    form = ReviewForm()
+    if form.validate():
+        review = Review(userID=current_user.id, movieID=id, rating=form.rating.data, text=form.text.data)
+        db.session.add(review)
+        db.session.commit()
+        return redirect(url_for('index'))
+    else: # if the form was invalid
+        # flash error messages and redirect to get login form again
+        for field, error in form.errors.items():
+            flash(f"{field}: {error}")
+        return redirect(url_for('getMovie'), id=id)
 
 def makeRequestID(id: str):
     base_url = f"https://api.themoviedb.org/3/movie/{id}?api_key=d136d005b47c87f94a7f7245dbede8dd"
