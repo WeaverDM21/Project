@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/static/styles/movie.css">
+  <script src="/static/scripts/movie.js"></script>
   <title>Movie</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
@@ -37,7 +38,7 @@
       </div>
     </div>
     <div class="Movies">
-      <img src="https://image.tmdb.org/t/p/w500/{{movie_info['poster_path']}}" width="400" height="600" alt="Movie Poster">
+      <img src="https://image.tmdb.org/t/p/w500/{{movie_info['poster_path']}}" id="movie_poster" alt="Movie Poster">
       <div class="text-content">
         <div class="name">
           <h1>{{movie_info['original_title']}}</h1>
@@ -48,8 +49,36 @@
         <div class="description">
           <p>{{movie_info['overview']}}</p>
         </div>
+        <div id="reviews_div">
+          <h2>User Reviews</h2>
+          {% if reviews %}
+            {% for review in reviews %}
+              <p id="review_text">Rating: {{review.rating}} <br> {{review.text}}</p>
+              <br>
+            {% endfor %}
+          {% else %}
+            <p id="review_text">No User Reviews Yet</p>
+          {% endif %}
+        </div>
       </div>
     </div>    
+
+    <div id="review_Div">
+      <form method="POST">
+        <h1 id="review_header">Leave a Review</h1>
+        {{form.hidden_tag()}}
+
+        <div id="text_div">
+          {{form.text(id="text_input")}}
+        </div>
+
+        <div id="submit_div">
+          {{form.rating.label(id="rating_label")}}
+          {{form.rating(id="rating_input")}}
+          {{form.submit()}}
+        </div>
+      </form>
+    </div>
   </main>
 </body>
 </html>
