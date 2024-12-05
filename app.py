@@ -152,7 +152,7 @@ def getMovie(id: int):
     movie_info = makeRequestID(id)
     print(f"In request header: {id}")
     form = ReviewForm()
-    reviews = Review.query.filter_by(movieID=id).all()
+    reviews = db.session.query(Review, User).join(User, Review.userID == User.id).filter(Review.movieID == id).all()
     return render_template('movie.html', movie_info=movie_info, form=form, reviews=reviews)
 
 @app.post('/movie/<int:id>/')
@@ -163,12 +163,12 @@ def post_Movie(id: int):
         review = Review(userID=current_user.id, movieID=id, rating=form.rating.data, text=form.text.data)
         db.session.add(review)
         db.session.commit()
-        return redirect(url_for('index'))
+        return redirect(url_for('getMovie', id=id))
     else: # if the form was invalid
         # flash error messages and redirect to get login form again
         for field, error in form.errors.items():
             flash(f"{field}: {error}")
-        return redirect(url_for('getMovie'), id=id)
+        return redirect(url_for('getMovie', id=id))
 
 def makeRequestID(id: str):
     base_url = f"https://api.themoviedb.org/3/movie/{id}?api_key=d136d005b47c87f94a7f7245dbede8dd"
@@ -207,4 +207,39 @@ def admin_required(f):
 @login_required
 @admin_required
 def adminPage():
-    return render_template('admin.html')
+    # Example inappropriate words list (can be more comprehensive)
+    inappropriate_words = ['fuck', 'shit', 'crap']
+
+    # Create a filter condition for reviews containing inappropriate words
+    filter_condition = None
+    for word in inappropriate_words:
+        condition = Review.text.ilike(f'%{word}%')
+        filter_condition = condition if filter_condition is None else filter_condition | condition
+
+    # Query reviews that contain inappropriate words
+    inappropriate_reviews = db.session.query(Review, User).join(User, Review.userID == User.id).filter(filter_condition).all()
+    # Fetch movie names for each inappropriate review
+    reviews_with_movies = []
+    for review, user in inappropriate_reviews:
+        movie_info = makeRequestID(review.movieID)  # Assumes makeRequestID fetches movie details
+        movie_name = movie_info.get("title", "Unknown Movie") if movie_info else "Unknown Movie"
+        reviews_with_movies.append((review, user, movie_name))
+
+    return render_template('admin.html', reviews_with_movies=reviews_with_movies, current_user=current_user)
+    
+@app.post('/admin/delete_review/<int:review_id>/')
+@login_required
+@admin_required
+def delete_review(review_id: int):
+    review = Review.query.get_or_404(review_id)
+    db.session.delete(review)
+    db.session.commit()
+    flash("Review deleted successfully.", "success")
+    return redirect(url_for('adminPage'))
+
+@app.post('/admin/ignore_review/<int:review_id>/')
+@login_required
+@admin_required
+def ignore_review(review_id: int):
+    flash("Review ignored.", "info")
+    return redirect(url_for('adminPage'))
