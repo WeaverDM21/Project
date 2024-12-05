@@ -67,7 +67,7 @@
               <tbody>
                 {% for review, user, movie_name in reviews_with_movies %}
                 <tr>
-                  <td>{{ user.email }}</td>
+                  <td>{{ user.email.split('@')[0].upper() }}</td>
                   <td>{{ movie_name }}</td>
                   <td>{{ review.text }}</td>
                   <td>
