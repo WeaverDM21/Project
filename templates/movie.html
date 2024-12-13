@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/static/styles/movie.css">
   <script src="/static/scripts/movie.js"></script>
-  <title>Movie</title>
+  <title>{{movie_info['original_title']}}</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
@@ -15,10 +15,10 @@
   <main>
     <div class="navdiv">
       <div class="title">
-        <h1><a>Movie Reviews</a></h1>
+        <h1><a href="/">ADG Reviews</a></h1>
       </div>
       <div class="search-container">
-        <input type="text" id="search-bar" class="search-bar" placeholder="Search...">
+        <input type="text" id="search-bar" class="search-bar" placeholder="Search Movies">
         <div id="search-results" class="search-results"></div>
       </div>
       <div class="registration">
@@ -52,8 +52,8 @@
         <div id="reviews_div">
           <h2>User Reviews</h2>
           {% if reviews %}
-            {% for review in reviews %}
-              <p id="review_text">Rating: {{review.rating}} <br> {{review.text}}</p>
+            {% for review, user in reviews %}
+              <p id="review_text">{{user.email.split('@')[0].upper()}} gave a rating of {{review.rating}} <br> &nbsp;&nbsp;&nbsp;&nbsp;- {{review.text}}</p>
               <br>
             {% endfor %}
           {% else %}

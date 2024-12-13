@@ -50,6 +50,12 @@ async function loadHomePage() {
     loadUrl(url, "scroll-box-romance");
     url = `https://api.themoviedb.org/3/discover/movie?api_key=d136d005b47c87f94a7f7245dbede8dd&with_genres=37`;
     loadUrl(url, "scroll-box-western");
+    url = `https://api.themoviedb.org/3/discover/movie?api_key=d136d005b47c87f94a7f7245dbede8dd&with_genres=80`;
+    loadUrl(url, "scroll-box-crime");
+    url = `https://api.themoviedb.org/3/discover/movie?api_key=d136d005b47c87f94a7f7245dbede8dd&with_genres=10751`;
+    loadUrl(url, "scroll-box-family");
+    url = `https://api.themoviedb.org/3/discover/movie?api_key=d136d005b47c87f94a7f7245dbede8dd&with_genres=9648`;
+    loadUrl(url, "scroll-box-mystery");
 }
 async function loadUrl(url, box) {
     const response = await fetch(url);
@@ -58,7 +64,7 @@ async function loadUrl(url, box) {
     var i = 0;
     if (Array.isArray(index["results"])) {
         for (const movie of index["results"]) {
-            if (i < 10) {
+            if (i < 10 && movie["adult"] === false) {
                 const section = document.createElement("section");
                 section.id = "poster-section";
                 const link = document.createElement("a");

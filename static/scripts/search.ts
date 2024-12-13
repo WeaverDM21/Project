@@ -61,6 +61,15 @@ async function loadHomePage() {
     // Western Movies
     url = `https://api.themoviedb.org/3/discover/movie?api_key=d136d005b47c87f94a7f7245dbede8dd&with_genres=37`;
     loadUrl(url, "scroll-box-western");
+    // Crime Movies
+    url = `https://api.themoviedb.org/3/discover/movie?api_key=d136d005b47c87f94a7f7245dbede8dd&with_genres=80`;
+    loadUrl(url, "scroll-box-crime");
+    // Family Movies
+    url = `https://api.themoviedb.org/3/discover/movie?api_key=d136d005b47c87f94a7f7245dbede8dd&with_genres=10751`;
+    loadUrl(url, "scroll-box-family");
+    // Mystery Movies
+    url = `https://api.themoviedb.org/3/discover/movie?api_key=d136d005b47c87f94a7f7245dbede8dd&with_genres=9648`;
+    loadUrl(url, "scroll-box-mystery");
 }
 
 async function loadUrl(url: string, box: string) {
@@ -72,7 +81,7 @@ async function loadUrl(url: string, box: string) {
     var i = 0;
     if (Array.isArray(index["results"])) {
         for (const movie of index["results"]) {
-            if (i < 10){
+            if (i < 10 && movie["adult"] === false){
                 // Create a section
                 const section = document.createElement("section");
                 section.id = "poster-section";
