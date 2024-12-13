@@ -49,6 +49,32 @@
         {% endif %}
       </div>
     </div>
+    <div class="filtered-reviews">
+      <h2>Inappropriate Reviews</h2>
+      <hr>
+      {% if reviews_with_movies %}
+        <div class="reviews-list">
+          {% for review, user, movie_name in reviews_with_movies %}
+            <div class="review-item">
+              <h2>{{ movie_name }}</h2>
+              <p><strong>Review:</strong> {{ review.text }}</p>
+              <p><strong>User:</strong> {{ user.email }}</p>
+    
+              <form action="{{ url_for('delete_review', review_id=review.id) }}" method="post" style="display: inline;">
+                <button type="submit" class="delete-button">Delete</button>
+              </form>
+    
+              <form action="{{ url_for('ignore_review', review_id=review.id) }}" method="post" style="display: inline;">
+                <button type="submit" class="ignore-button">Ignore</button>
+              </form>
+            </div>
+            <hr>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>No inappropriate reviews found.</p>
+      {% endif %}
+    </div>
   </main>
 </body>
 </html>
