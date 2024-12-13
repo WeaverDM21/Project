@@ -1,42 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Page</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Page</title>
+  <script src="/static/scripts/search.js"></script>
+  <link rel="stylesheet" href="/static/styles/home.css">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 </head>
-<body>
-    <header>
-      <div class="container">
-        {% for message in get_flashed_messages() %}
-          <div class="alert alert-warning d-flex align-items-center alert-dismissible fade show">
-            <button type="button" class="close" data-bs-dismiss="alert"> 
-              &times;
-            </button>
-            {{ message }}
-          </div>
-        {% endfor %}
+<body class="Background">
+  <header>
+    <!-- <div class="container">
+      {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning d-flex align-items-center alert-dismissible fade show">
+          <button type="button" class="close" data-bs-dismiss="alert"> 
+            &times;
+          </button>
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div> -->
+  </header>
+  <main>
+    <div class="navdiv">
+      <div class="title">
+        <h1><a>Movie Reviews</a></h1>
       </div>
-    </header>
-    <main>
-      <h1>Admin Page</h1>
-      <p>You are on the correct page.</p>
-      {% if current_user.is_authenticated %}
-        <p>Logged in as {{ current_user.email }}</p>
-      {% else %}
-        <p>Not logged in</p>
-      {% endif %}
-    </main>
-    <footer>
-      <br>
-      <a href="/register">Register</a>
-      &emsp;&emsp;&emsp;&emsp;&emsp;
-      <a href="/login">Login</a>
-      &emsp;&emsp;&emsp;&emsp;&emsp;
-      <a href="/logout">Logout</a>
-      &emsp;&emsp;&emsp;&emsp;&emsp;
-      <a href="/admin">Admin</a>
-      <br>
-    </footer>
+      <div class="search-container">
+        <input type="text" id="search-bar" class="search-bar" placeholder="Search...">
+        <div id="search-results" class="search-results"></div>
+      </div>
+      <div class="registration">
+        <a href="/"> Home </a>
+        {% if current_user.is_authenticated %}
+          {% if current_user.role == "admin" %}
+            <a href="/admin"> Admin </a>
+          {% endif %}
+          <a href="/logout"> Logout </a>
+          <a>{{current_user.email}}</a>
+        {% else %}
+          <a href="/login"> Login </a>
+          {% if current_user.role == "admin" %}
+            <a href="/admin"> Admin </a>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </main>
 </body>
 </html>
