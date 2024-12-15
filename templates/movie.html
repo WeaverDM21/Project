@@ -59,35 +59,39 @@
         </div>
       </div>
     </div>  
-    <div id="reviews_div">
-      <h2>User Reviews</h2>
-      {% if reviews %}
-      <div style="height:100px;width:360px;border:1px solid #ccc;overflow:auto;">
-        {% for review, user in reviews %}
-          <p>{{user.email.split('@')[0].upper()}} gave a rating of {{review.rating}} <br> &nbsp;&nbsp;&nbsp;&nbsp;- {{review.text}}</p>
-          <br>
-        {% endfor %}
+    <hr>
+    <div class="container">
+      <div id="reviews_div">
+        <h1 id="review_header">User Reviews</h1>
+        {% if reviews %}
+        <div style="height:100px;width:100%;border:1px solid #ccc;overflow:auto;">
+          <hr>
+          {% for review, user in reviews %}
+            <p>{{user.email.split('@')[0].upper()}} gave a rating of {{review.rating}} <br> &nbsp;&nbsp;&nbsp;&nbsp;- {{review.text}}</p>
+            <hr>
+          {% endfor %}
+        </div>
+        {% else %}
+          <p id="review_text">No User Reviews Yet</p>
+        {% endif %}
+      </div>  
+
+      <div id="review_Div">
+        <form method="POST">
+          <h1 id="review_header">Leave a Review</h1>
+          {{form.hidden_tag()}}
+
+          <div id="text_div">
+            {{form.text(id="text_input")}}
+          </div>
+
+          <div id="submit_div">
+            {{form.rating.label(id="rating_label")}}
+            {{form.rating(id="rating_input")}}
+            {{form.submit()}}
+          </div>
+        </form>
       </div>
-      {% else %}
-        <p id="review_text">No User Reviews Yet</p>
-      {% endif %}
-    </div>  
-
-    <div id="review_Div">
-      <form method="POST">
-        <h1 id="review_header">Leave a Review</h1>
-        {{form.hidden_tag()}}
-
-        <div id="text_div">
-          {{form.text(id="text_input")}}
-        </div>
-
-        <div id="submit_div">
-          {{form.rating.label(id="rating_label")}}
-          {{form.rating(id="rating_input")}}
-          {{form.submit()}}
-        </div>
-      </form>
     </div>
   </main>
 </body>

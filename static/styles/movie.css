@@ -193,8 +193,8 @@ img {
 }
 
 #review_Div {
-    padding-top: 50px;
     padding-bottom: 30px;
+    width: 49%;
 }
 
 #review_header {
@@ -204,7 +204,7 @@ img {
 
 #text_input {
     width: 100%;
-    height: 300px;
+    height: 100px;
     text-align: left;
     vertical-align: top;
     resize: none;     
@@ -234,6 +234,7 @@ img {
 #reviews_div {
     padding-bottom: 10px;
     padding-left: 15px;
+    width: 49%;
     color: white
 }
 
@@ -269,4 +270,14 @@ img {
 .actor img {
     max-width: 300px;
     max-height: 300px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between; /* Adds spacing between the two divs */
+    gap: 20px; /* Adds space between the divs */
+}
+
+.container p{
+    padding-left: 5px;
 }
