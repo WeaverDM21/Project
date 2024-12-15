@@ -34,7 +34,6 @@
         <div id="search-results" class="search-results"></div>
       </div>
       <div class="registration">
-        <a href="/"> Home </a>
         {% if current_user.is_authenticated %}
           {% if current_user.role == "admin" %}
             <a href="/admin"> Admin </a>
