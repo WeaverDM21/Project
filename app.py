@@ -159,7 +159,7 @@ def getMovie(id: int):
     for review, user in reviews:
         total += 1
         num += review.rating
-    if (total > 1):
+    if (total >= 1):
         average_rating = num/total
     else:
         average_rating = 0
