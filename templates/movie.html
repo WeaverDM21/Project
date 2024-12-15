@@ -62,10 +62,12 @@
     <div id="reviews_div">
       <h2>User Reviews</h2>
       {% if reviews %}
+      <div style="height:100px;width:360px;border:1px solid #ccc;overflow:auto;">
         {% for review, user in reviews %}
-          <p id="review_text">{{user.email.split('@')[0].upper()}} gave a rating of {{review.rating}} <br> &nbsp;&nbsp;&nbsp;&nbsp;- {{review.text}}</p>
+          <p>{{user.email.split('@')[0].upper()}} gave a rating of {{review.rating}} <br> &nbsp;&nbsp;&nbsp;&nbsp;- {{review.text}}</p>
           <br>
         {% endfor %}
+      </div>
       {% else %}
         <p id="review_text">No User Reviews Yet</p>
       {% endif %}
