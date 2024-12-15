@@ -29,7 +29,6 @@
     font-size: 12px;
     font-weight: 600;
     color: white;
-    padding-bottom: 10px;
     padding-left: 15px;
 }
 
@@ -206,8 +205,8 @@ img {
 #text_input {
     width: 100%;
     height: 300px;
-    text-align: left;      /* Aligns text to the left */
-    vertical-align: top;   /* Ensures the text starts at the top */
+    text-align: left;
+    vertical-align: top;
     resize: none;     
 }
 
@@ -224,11 +223,11 @@ img {
     color: white;
 }
 
-.Movies img {
-    flex-grow: 0;         /* Prevents image from growing */
-    flex-shrink: 0;       /* Prevents image from shrinking */
-    height: 98vh;        /* Set your desired height */
-    width: auto;          /* Maintain aspect ratio */
+#movie_poster {
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 98vh;
+    width: auto;
     padding-top: 57px;
 }
 
@@ -254,4 +253,19 @@ img {
 
 .title a:hover {
     color: lightgray;
+}
+
+.actors {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.actor {
+    text-align: center;
+}
+
+.actor img {
+    max-width: 300px;
+    max-height: 300px;
 }
