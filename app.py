@@ -150,10 +150,11 @@ def index():
 @app.get('/movie/<int:id>/')
 def getMovie(id: int):
     movie_info = makeRequestID(id)
+    cast_info = makeRequestIDCast(id)
     print(f"In request header: {id}")
     form = ReviewForm()
     reviews = db.session.query(Review, User).join(User, Review.userID == User.id).filter(Review.movieID == id).all()
-    return render_template('movie.html', movie_info=movie_info, form=form, reviews=reviews)
+    return render_template('movie.html', movie_info=movie_info, cast_info=cast_info, form=form, reviews=reviews)
 
 @app.post('/movie/<int:id>/')
 @login_required
@@ -183,6 +184,19 @@ def makeRequestID(id: str):
         #response2 = requests.get(f"https://api.themoviedb.org/3/movie/{id}?api_key=d136d005b47c87f94a7f7245dbede8dd")
         #data2 = response2.json()
         #print(data2)
+        return data
+    else:
+        print(f"Error: {response.status_code}")
+
+def makeRequestIDCast(id: str):
+    base_url = f"https://api.themoviedb.org/3/movie/{id}/credits?api_key=d136d005b47c87f94a7f7245dbede8dd"
+    print(f"In makeRequestCast {id}")
+
+    response = requests.get(base_url)
+
+    if response.status_code == 200:
+        data = response.json()
+        print(data)  # This will print the movie cast data
         return data
     else:
         print(f"Error: {response.status_code}")

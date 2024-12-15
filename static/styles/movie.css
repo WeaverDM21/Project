@@ -33,6 +33,11 @@
     padding-left: 15px;
 }
 
+.actors {
+    color: white;
+    font-size: 18px;
+}
+
 .search-container {
     flex-grow: 1;
     max-width: 1000px;

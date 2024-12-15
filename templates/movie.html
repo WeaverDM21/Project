@@ -49,6 +49,59 @@
         <div class="description">
           <p>{{movie_info['overview']}}</p>
         </div>
+        <div class="actors">
+          <div>
+            <img style="max-width:325px; max-height:325px" src="https://image.tmdb.org/t/p/w500/{{cast_info['cast'][0]['profile_path']}}">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <h3>{{cast_info['cast'][0]['name']}}</h3>
+          </div>
+          <div>
+            <img style="max-width:325px; max-height:325px" src="https://image.tmdb.org/t/p/w500/{{cast_info['cast'][1]['profile_path']}}">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <h3>{{cast_info['cast'][1]['name']}}</h3>
+          </div>
+          <div>
+            <img style="max-width:325px; max-height:325px" src="https://image.tmdb.org/t/p/w500/{{cast_info['cast'][2]['profile_path']}}">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <h3>{{cast_info['cast'][2]['name']}}</h3>
+          </div>
+        </div>
         <div id="reviews_div">
           <h2>User Reviews</h2>
           {% if reviews %}
