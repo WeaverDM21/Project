@@ -154,7 +154,16 @@ def getMovie(id: int):
     print(f"In request header: {id}")
     form = ReviewForm()
     reviews = db.session.query(Review, User).join(User, Review.userID == User.id).filter(Review.movieID == id).all()
-    return render_template('movie.html', movie_info=movie_info, cast_info=cast_info, form=form, reviews=reviews)
+    total = 0
+    num = 0
+    for review, user in reviews:
+        total += 1
+        num += review.rating
+    if (total > 1):
+        average_rating = num/total
+    else:
+        average_rating = 0
+    return render_template('movie.html', movie_info=movie_info, cast_info=cast_info, form=form, reviews=reviews, average_rating=average_rating)
 
 @app.post('/movie/<int:id>/')
 @login_required
@@ -249,11 +258,4 @@ def delete_review(review_id: int):
     db.session.delete(review)
     db.session.commit()
     flash("Review deleted successfully.", "success")
-    return redirect(url_for('adminPage'))
-
-@app.post('/admin/ignore_review/<int:review_id>/')
-@login_required
-@admin_required
-def ignore_review(review_id: int):
-    flash("Review ignored.", "info")
     return redirect(url_for('adminPage'))

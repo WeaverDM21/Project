@@ -62,10 +62,7 @@
               <form action="{{ url_for('delete_review', review_id=review.id) }}" method="post" style="display: inline;">
                 <button type="submit" class="delete-button">Delete</button>
               </form>
-    
-              <form action="{{ url_for('ignore_review', review_id=review.id) }}" method="post" style="display: inline;">
-                <button type="submit" class="ignore-button">Ignore</button>
-              </form>
+  
             </div>
             <hr>
           {% endfor %}

@@ -41,7 +41,7 @@
       <img src="https://image.tmdb.org/t/p/w500/{{movie_info['poster_path']}}" id="movie_poster" alt="Movie Poster">
       <div class="text-content">
         <div class="name">
-          <h1>{{movie_info['original_title']}}</h1>
+          <h1>{{movie_info['original_title']}} {{average_rating|round(1)}}/5.0</h1>
         </div>
         <div class="details">
           <h3>{{movie_info['release_date']}}</h3>
@@ -57,19 +57,19 @@
           </div>
           {% endfor %}
         </div>
-        <div id="reviews_div">
-          <h2>User Reviews</h2>
-          {% if reviews %}
-            {% for review, user in reviews %}
-              <p id="review_text">{{user.email.split('@')[0].upper()}} gave a rating of {{review.rating}} <br> &nbsp;&nbsp;&nbsp;&nbsp;- {{review.text}}</p>
-              <br>
-            {% endfor %}
-          {% else %}
-            <p id="review_text">No User Reviews Yet</p>
-          {% endif %}
-        </div>
       </div>
-    </div>    
+    </div>  
+    <div id="reviews_div">
+      <h2>User Reviews</h2>
+      {% if reviews %}
+        {% for review, user in reviews %}
+          <p id="review_text">{{user.email.split('@')[0].upper()}} gave a rating of {{review.rating}} <br> &nbsp;&nbsp;&nbsp;&nbsp;- {{review.text}}</p>
+          <br>
+        {% endfor %}
+      {% else %}
+        <p id="review_text">No User Reviews Yet</p>
+      {% endif %}
+    </div>  
 
     <div id="review_Div">
       <form method="POST">
